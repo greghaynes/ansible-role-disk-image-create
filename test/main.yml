@@ -1,0 +1,4 @@
+- name: Build disk image
+  hosts: localhost
+  roles:
+    - { role: disk-image-create, dibcreate_elements: ['ubuntu-minimal'] }

@@ -1,0 +1,22 @@
+- name: Check arguments
+  fail: msg="{{ item }} is not defined"
+  when: '{{ item }} is undefined'
+  with_items:
+    - dibcreate_destination
+    - dibcreate_elements
+    - dibcreate_env_vars
+    - dibcreate_extra_packages
+    - dibcreate_output_types
+    - dibcreate_log_dest
+  tags: [config-check]
+
+- name: Stat destination
+  stat: path={{ destination }}
+  register: _dib_dest
+
+- name: Build disk image
+  become: true
+  become_user: root
+  environment: '{{ env_vars }}'
+  shell: '{{ venv_dir}}/bin/disk-image-create -n -t {{ output_types | join(",") }} -p {{ extra_packages | join(",") }} -o {{ destination }} {{ elements | join(" ") }}  2>&1 | tee {{ log_dest }}'
+  when: overwrite_dest and _dib_dest.stat.exists

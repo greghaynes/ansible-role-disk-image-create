@@ -1,0 +1,3 @@
+dependencies:
+    - role: install-openstack-project
+      project: '{{ diskimage_builder }}'
