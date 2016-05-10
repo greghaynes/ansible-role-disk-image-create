@@ -7,16 +7,17 @@
     - dibcreate_env_vars
     - dibcreate_extra_packages
     - dibcreate_output_types
+    - dibcreate_overwrite_dest
     - dibcreate_log_dest
   tags: [config-check]
 
 - name: Stat destination
-  stat: path={{ destination }}
+  stat: path={{ dibcreate_destination }}
   register: _dib_dest
 
 - name: Build disk image
   become: true
   become_user: root
-  environment: '{{ env_vars }}'
-  shell: '{{ venv_dir}}/bin/disk-image-create -n -t {{ output_types | join(",") }} -p {{ extra_packages | join(",") }} -o {{ destination }} {{ elements | join(" ") }}  2>&1 | tee {{ log_dest }}'
-  when: overwrite_dest and _dib_dest.stat.exists
+  environment: '{{ dibcreate_env_vars }}'
+  shell: 'disk-image-create -n -t {{ dibcreate_output_types | join(",") }} -p {{ dibcreate_extra_packages | join(",") }} -o {{ dibcreate_destination }} {{ dibcreate_elements | join(" ") }}  2>&1 | tee {{ dibcreate_log_dest }}'
+  when: dibcreate_overwrite_dest and _dib_dest.stat.exists
