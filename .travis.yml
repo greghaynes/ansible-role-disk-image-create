@@ -25,9 +25,9 @@ script:
   # Basic role syntax check
   - ansible-playbook tests/test.yml -i tests/inventory --syntax-check
   # Argument check
-  - ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook tests/test.yml -i tests/inventory -t config-check
+  - ansible-playbook tests/test.yml -i tests/inventory -t config-check -e ansible_connection=local
   # Run tests
-  - ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook tests/test.yml -i tests/inventory
+  - ansible-playbook tests/test.yml -i tests/inventory -e ansible_connection=local
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
