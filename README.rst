@@ -19,9 +19,12 @@ The available role variables and default values are:
 
 .. code-block:: yaml
 
-  dibcreate_elements: []
+  dibcreate_destination: undefined
+  dibcreate_elements: undefined
   dibcreate_env_vars: []
   dibcreate_extra_packages: []
   dibcreate_log_dest: /dev/null
   dibcreate_output_types: [ qcow2 ]
   dibcreate_overwrite_dest: False
+
+The variables `dibcreate_destination` and `dibcreate_elements` are required.

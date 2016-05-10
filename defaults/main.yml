@@ -1,4 +1,3 @@
-dibcreate_elements: []
 dibcreate_env_vars: []
 dibcreate_extra_packages: []
 dibcreate_log_dest: /dev/null
