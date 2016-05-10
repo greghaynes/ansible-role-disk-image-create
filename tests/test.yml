@@ -2,4 +2,4 @@
 - hosts: localhost
   remote_user: root
   roles:
-    - { role: disk-image-create, dibcreate_elements: [ubuntu-minimal] }
+    - { role: ansible-role-disk-image-create, dibcreate_elements: [ubuntu-minimal] }
